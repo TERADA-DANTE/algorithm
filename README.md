@@ -21,3 +21,6 @@ https://www.acmicpc.net/problem/1168
 
 https://www.acmicpc.net/problem/11005
 https://www.acmicpc.net/problem/2745
+https://www.acmicpc.net/problem/2089
+https://www.acmicpc.net/problem/11576
+https://www.acmicpc.net/problem/6588
