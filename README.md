@@ -29,3 +29,7 @@ https://www.acmicpc.net/problem/11576
 ---
 
 ---
+
+## Memo✨
+
+prefix \_ : Solved
