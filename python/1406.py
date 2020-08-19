@@ -4,56 +4,67 @@ n = int(sys.stdin.readline())
 
 
 class Node():
-    def __init__(self, data=None, prev=None, next=None):
+    def __init__(self, data, prev, next):
         self.data = data
         self.prev = prev
         self.next = next
 
 
 class LinkedList():
-    def __init__(self):
-        self.body = Node()
+    def __init__(self, initials=[]):
+        self.head = Node(None, None, None)
+        for initial in initials:
+            self.append(initial)
 
     def append(self, data):
-        self.body.next = Node(data, self.body, Node())
-        self.body = self.body.next
+        self.head.next = Node(data, self.head, Node(None, None, None))
+        self.head = self.head.next
+        self.head.next.prev = self.head
 
     def L(self):
-        if self.body.prev:
-            self.body = self.body.prev
+        if self.head.prev:
+            self.head = self.head.prev
 
     def D(self):
-        if self.body.next:
-            self.body = self.body.next
+        if self.head.next.data:
+            self.head = self.head.next
 
     def B(self):
-        if self.body.prev:
-            self.body.next.prev = self.body.prev
-            self.body.prev.next = self.body.next
+        if self.head.prev:
+            self.head.next.prev = self.head.prev
+            self.head.prev.next = self.head.next
+            self.head = self.head.prev
 
     def P(self, data):
-        self.body.next.prev = Node(data, self.body, self.body.next)
-        self.body.next = Node(data, self.body, self.body.next)
-        self.body = self.body.next
+        self.head.next = Node(data, self.head, self.head.next)
+        self.head = self.head.next
+        self.head.next.prev = self.head
 
-    def show(self):
-        while self.body.prev:
-            self.L()
-        self.D()
-        while self.body.data:
-            print(self.body.data)
-            self.D()
+    def getStr(self):
+        while self.head.prev:
+            self.head = self.head.prev
+        self.head = self.head.next
+        s = ''
+        while self.head.data:
+            s += self.head.data
+            self.head = self.head.next
+        return s
 
 
 def solution(n):
-    # Initializing
-    link = LinkedList()
-    for i in range(len(initials)):
-        link.append(initials[i])
-    # for i in range(n):
-    #     command = sys.stdin.readline().split()
-    #     if len(command) == 2:
-    #         link.P(command[1])
+    link = LinkedList(initials)
+    for _ in range(n):
+        command = sys.stdin.readline().split()
+        if len(command) == 2:
+            link.P(command[1])
+        else:
+            if command[0] == 'L':
+                link.L()
+            elif command[0] == 'D':
+                link.D()
+            else:
+                link.B()
+    return link.getStr()
 
 
 print(solution(n))
