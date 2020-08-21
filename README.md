@@ -22,6 +22,8 @@ https://www.acmicpc.net/problem/2089
 
 https://www.acmicpc.net/problem/1707
 
+https://www.acmicpc.net/problem/9466
+
 ## Memo✨
 
 file name prefix \_ : Solved
@@ -29,8 +31,6 @@ file name prefix \_ : Solved
 ## Currently struggling with 🚢
 
 Graph / BFS / DFS
-
-https://www.acmicpc.net/problem/9466
 
 https://www.acmicpc.net/problem/2667
 
