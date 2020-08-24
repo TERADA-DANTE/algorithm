@@ -32,8 +32,6 @@ file name prefix \_ : Solved
 
 Graph / BFS / DFS
 
-https://www.acmicpc.net/problem/7576
-
 https://www.acmicpc.net/problem/2178
 
 https://www.acmicpc.net/problem/2146
