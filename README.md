@@ -28,6 +28,10 @@ https://www.acmicpc.net/problem/2146
 
 https://www.acmicpc.net/problem/1991
 
+https://www.acmicpc.net/problem/11662
+
+https://www.acmicpc.net/problem/11725
+
 ## Memo✨
 
 file name prefix \_ : Solved
