@@ -42,17 +42,13 @@ https://www.acmicpc.net/problem/1167
 
 https://www.acmicpc.net/problem/1967
 
+https://www.acmicpc.net/problem/1451
+
 ## Memo✨
 
 file name prefix \_ : Solved
 
 ## Struggling with
-
-https://www.acmicpc.net/problem/1107
-
-https://www.acmicpc.net/problem/1451
-
-https://www.acmicpc.net/problem/9095
 
 https://www.acmicpc.net/problem/10819
 
