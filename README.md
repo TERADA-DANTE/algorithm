@@ -50,12 +50,6 @@ file name prefix \_ : Solved
 
 ## Struggling with
 
-https://www.acmicpc.net/problem/10819
-
-https://www.acmicpc.net/problem/10971
-
-https://www.acmicpc.net/problem/1697
-
 https://www.acmicpc.net/problem/1963
 
 https://www.acmicpc.net/problem/9019
