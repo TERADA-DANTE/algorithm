@@ -60,8 +60,6 @@ file name prefix \_ : Solved
 
 ## Struggling with
 
-https://www.acmicpc.net/problem/5014
-
 https://www.acmicpc.net/problem/1759
 
 https://www.acmicpc.net/problem/2580
