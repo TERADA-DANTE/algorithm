@@ -6,11 +6,11 @@ function solution(n, t, m, p) {
       .fill(undefined)
       .map((_, i) => (i < 10 ? i : String.fromCharCode(i + 55))),
   ]
-  let sex = (n, boji, result = []) =>
-    n >= boji
-      ? sex(parseInt(n / boji), boji, [system[n % boji], ...result])
-      : [system[n % boji], ...result]
-  do (numbers = numbers.concat(sex(i, n))), i++
+  let execute = (n, ll, result = []) =>
+    n >= ll
+      ? execute(parseInt(n / ll), ll, [system[n % ll], ...result])
+      : [system[n % ll], ...result]
+  do (numbers = numbers.concat(execute(i, n))), i++
   while (numbers.length < t * m)
   return numbers.reduce(
     (pre, cur, idx) => (idx % m === p - 1 ? pre + cur : cur),

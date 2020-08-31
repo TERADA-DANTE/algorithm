@@ -15,13 +15,13 @@ function solution(N, road, K) {
     ),
     ["💎"].concat(new Array(N - 1).fill(undefined)),
   ]
-  let SEX = () =>
+  let getNext = () =>
     graph[0].reduce(
       (pre, cur, idx) => (!isVisited[idx] && cur < pre[0] ? [cur, idx] : pre),
       [Infinity, 0]
     )[1]
-  while (SEX()) {
-    let next = SEX()
+  while (getNext()) {
+    let next = getNext()
     graph[next].forEach(
       (v, i) => (graph[0][i] = Math.min(graph[0][i], graph[0][next] + v))
     )
