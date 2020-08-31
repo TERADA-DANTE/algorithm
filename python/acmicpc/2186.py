@@ -1,14 +1,11 @@
-import time
 n, m, k = list(map(int, input().split()))
 board = [list(input()) for _ in range(n)]
 target = input() + ' '
 answer = []
 cnt = 0
-memo = dict()
-for i in range(n):
-    for j in range(m):
-        if board[i][j] in list(target):
-            memo[f'{i}{j}'] = board[i][j]
+dp = [[[None]*len(target) for _ in range(m)] for _ in range(n)]
+
+# DFS + DP
 
 
 def getInitial(board, t):
@@ -23,34 +20,41 @@ def getInitial(board, t):
 def getNext(pre, i, h):
     global cnt
     r, c = pre
-    for x in range(1, k+1):
+    next = []
+    for t in range(1, k+1):
         # 위
-        if memo.get(f'{r-x}{c}'):
-            if memo[f'{r-x}{c}'] == target[i]:
-                getNext([r-x, c], i+1, h+1)
+        for x, y in [[0, 1], [1, 0], [0, -1], [-1, 0]]:
+            if dp[r+x*t][c+y*t][i] == 0:
+                continue
+            elif dp[r+x*t][c+y*t][i]:
+
+        if r-x >= 0 and board[r-x][c] == target[i]:
+            next.append([r-x, c])
             # 아래
-        if memo.get(f'{r+x}{c}'):
-            if memo[f'{r+x}{c}'] == target[i]:
-                getNext([r+x, c], i+1, h+1)
+        if r+x < n and board[r+x][c] == target[i]:
+            next.append([r+x, c])
             # 오른쪽
-        if memo.get(f'{r}{c+x}'):
-            if memo[f'{r}{c+x}'] == target[i]:
-                getNext([r, c+x], i+1, h+1)
+        if c+x < m and board[r][c+x] == target[i]:
+            next.append([r, c+x])
             # 왼쪽
-        if memo.get(f'{r}{c-x}'):
-            if memo[f'{r}{c-x}'] == target[i]:
-                getNext([r, c-x], i+1, h+1)
-    if h == len(target)-1:
-        cnt += 1
+        if c-x >= 0 and board[r][c-x] == target[i]:
+            next.append([r, c-x])
+    if next:
+        for cur in next:
+            getNext(cur, i+1, h+[cur])
+    elif not next and len(h) != len(target) - 1:
+        row, col = h[-1]
+        dp[row][col][len(h)-1] = 0
+    else:
+        for i, v in enumerate(h):
+            row, col = v
+            dp[row][col][i] = dp[row][col][i] + 1 if dp[row][col][i] else 1
 
 
 def solution(board):
-    print(memo)
     for pre in getInitial(board, target[0]):
-        getNext(pre, 1, 1)
+        getNext(pre, 1, [pre])
     return cnt
 
 
-s = time.time()
 print(solution(board))
-print(time.time() - s)
