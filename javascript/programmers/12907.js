@@ -1,18 +1,27 @@
-function solution(v, w) {
-  const lim = 10
-  const dp = new Array(5).fill(undefined).map((_) => new Array(lim + 1).fill(0))
-  for (let s = 0; s <= lim; s++) {
-    dp[1][s] = w[1] <= s ? v[1] : 0
-  }
-  for (let i = 2; i <= 4; i++) {
-    for (let s = 1; s <= lim; s++) {
-      if (s < w[i]) {
-        dp[i][s] = 0
-        continue
-      }
-    }
-  }
+function solution(n, money = money.sort((a, b) => a - b)) {
+  return (
+    new Array(money.length + 1)
+      .fill(undefined)
+      .map((_) => [1].concat(new Array(n).fill(0)))
+      .reduce(
+        (p, row, i) =>
+          p.concat([
+            i
+              ? row.reduce(
+                  (q, col, j) =>
+                    q.concat(
+                      !j
+                        ? 1
+                        : p[i - 1][j] +
+                            ((q[j - money[i - 1]] || 0) % 1000000007)
+                    ),
+                  []
+                )
+              : row,
+          ]),
+        []
+      )[money.length][n] % 1000000007
+  )
 }
 
-console.log(solution([null, 10, 40, 30, 50], [null, 5, 4, 6, 3]))
-//console.log(solution(10, [1, 2, 5]))
+console.log(solution(10, [5, 3, 7]))
