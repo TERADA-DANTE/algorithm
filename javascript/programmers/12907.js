@@ -1,19 +1,18 @@
-function solution(n, money) {
-  const dp = money.reduce(
-    (pre, cur) => ((pre[n - cur] = 1), pre),
-    new Array(n + 1).fill(0)
-  )
-  function execute(i) {
-    console.log(dp, i)
-    if (dp[i]) return dp[i]
-    // [1, 2, 5]
-    dp[i] = money
-      .filter((v) => i - v >= 0)
-      .reduce((pre, cur) => pre + execute(i - cur), 0)
-    return dp[i]
+function solution(v, w) {
+  const lim = 10
+  const dp = new Array(5).fill(undefined).map((_) => new Array(lim + 1).fill(0))
+  for (let s = 0; s <= lim; s++) {
+    dp[1][s] = w[1] <= s ? v[1] : 0
   }
-  return execute(n)
+  for (let i = 2; i <= 4; i++) {
+    for (let s = 1; s <= lim; s++) {
+      if (s < w[i]) {
+        dp[i][s] = 0
+        continue
+      }
+    }
+  }
 }
 
-console.log(solution(5, [1, 2, 5]))
+console.log(solution([null, 10, 40, 30, 50], [null, 5, 4, 6, 3]))
 //console.log(solution(10, [1, 2, 5]))
