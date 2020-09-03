@@ -1,16 +1,23 @@
 n, m = list(map(int, input().split()))
 l = min(n, m)
-boys = list(map(int, input().split()))
-girls = list(map(int, input().split()))
+b = list(map(int, input().split()))
+g = list(map(int, input().split()))
+boys, girls = b, g if len(b) <= len(g) else g, b
 
 
 def solution(boys, girls):
-    boys.sort()
-    girls.sort()
-    cnt = 0
-    for i in range(l):
-        cnt += abs(boys[i]-girls[i])
-    return cnt
+    d = dict()
+
+    def matching(boys, girls):
+        if len(boys) == 1:
+
+            d[f'{boys[0]}:{}']
+
+        elif len(girls) == 1:
+
+        else:
+
+    return min(matching(boys, girls))
 
 
 print(solution(boys, girls))
