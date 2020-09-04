@@ -1,17 +1,17 @@
+
 board = [list(map(int, input().split())) for _ in range(9)]
 zero = [[i, j] for i in range(9) for j in range(9) if not board[i][j]]
 flag = False
-answer = []
 
 
 def getCandidates(row, col):
-    hor = board[row]
-    ver = [board[i][col] for i in range(9)]
-    box = []
+    candidates = set()
     for i in range(3):
         for j in range(3):
-            box.append(board[3*(row//3)+i][3*(col//3)+j])
-    return [i for i in range(10) if i not in set(hor+ver+box)]
+            candidates.add(board[row][3*i+j])
+            candidates.add(board[3*(row//3)+i][3*(col//3)+j])
+            candidates.add(board[3*i+j][col])
+    return [i for i in range(10) if i not in candidates]
 
 
 def solution(i):
@@ -21,7 +21,7 @@ def solution(i):
     if i == len(zero):
         flag = True
         for i in range(9):
-            answer.append(board[i].copy())
+            print(*board[i])
         return
     else:
         row, col = zero[i]
@@ -33,4 +33,3 @@ def solution(i):
 
 
 solution(0)
-print('\n'.join([' '.join(list(map(str, s))) for s in answer]))
