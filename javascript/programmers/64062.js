@@ -8,7 +8,8 @@ function solution(stones, k) {
       r = m - 1
     }
   }
-  return r
+  for (let i = 0; i < 6974; i++)
+    if (!isCrossable(stones, r + i, k)) return r + i - 1
 }
 
 function isCrossable(array, n, k, cnt = 0) {

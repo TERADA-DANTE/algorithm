@@ -1,22 +1,26 @@
 import sys
 sys.setrecursionlimit(100000)
-input = sys.stdin.readline
 a = input()
 b = input()
+answer = 0
 
 
 def solution(a, b, cnt, flag=False):
+    global answer
     if flag:
-        return cnt
+        return
     if not a or not b:
         flag = True
-        return cnt
+        answer = cnt
+        return
     elif a[-1] == b[-1]:
         return solution(a[:-1], b[:-1], cnt+1)
     elif a[0] == b[0]:
         return solution(a[1:], b[1:], cnt + 1)
     else:
-        return max(solution(a[:-1], b, cnt), solution(a, b[:-1], cnt))
+        x = solution(a[:-1], b, cnt)
+        y = solution(a, b[:-1], cnt)
+        return max(x, y)
 
 
 print(solution(a, b, 0))
