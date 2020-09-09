@@ -1,15 +1,19 @@
 n, m = list(map(int, input().split()))
 
 
+def getNumbers(n, i, cnt=0, j=1):
+    while i**j <= n:
+        cnt += n//(i**j)
+        j += 1
+    return cnt
+
+
+def execute(n, m, i):
+    return getNumbers(n, i) - getNumbers(n-m, i) - getNumbers(m, i)
+
+
 def solution(n, m):
-    memo = {}
-
-    def combinations(a, b):
-        if memo.get(f"{a}C{b}"):
-            return memo[f"{a}C{b}"]
-        elif b == 1:
-            return a
-        memo[f"{a}C{b}"] = combinations(a-1, b) + combinations(a-1, b-1)
+    return min(execute(n, m, 2), execute(n, m, 5))
 
 
-pritn(solution(n, m))
+print(solution(n, m))
