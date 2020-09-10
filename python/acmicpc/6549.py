@@ -1,20 +1,27 @@
+from collections import deque
 answer = []
 
 
-def solution(n, heights):
-    dp = [[heights[0] if heights[0] > 1 else 1, max(heights[0], 1)]]
-    for i in range(1, n):
-        pre, val = dp[-1]
-        if pre <= heights[i]:
-            dp[i] = [pre, val + pre]
-        else:
+def solution(n, h):
+    dp = [None] * n
+    heights = deque(enumerate(h))
+    stack = deque([heights.popleft()])
+    while heights:
+        idx, val = heights.popleft()
+        if val < stack[-1][1]:
+            while stack:
+
+                length = len(stack)
+                index, value = stack.popleft()
+                dp[index] = value * length
+        stack.append((idx, val))
+    print(dp, stack)
+    return dp
 
 
 while True:
-    n, *heights = list(map(int, input().split()))
+    n, *h = list(map(int, input().split()))
     if not n:
         break
-    answer.append(solution(n, heights))
-print(
-    '\n'.join(list(map(str, answer)))
-)
+    answer.append(solution(n, h))
+print('\n'.join(list(map(str, answer))))
