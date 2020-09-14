@@ -1,26 +1,27 @@
-import sys
-sys.setrecursionlimit(100000)
+
 a = input()
 b = input()
-answer = 0
 
 
-def solution(a, b, cnt, flag=False):
-    global answer
-    if flag:
-        return
-    if not a or not b:
-        flag = True
-        answer = cnt
-        return
-    elif a[-1] == b[-1]:
-        return solution(a[:-1], b[:-1], cnt+1)
-    elif a[0] == b[0]:
-        return solution(a[1:], b[1:], cnt + 1)
-    else:
-        x = solution(a[:-1], b, cnt)
-        y = solution(a, b[:-1], cnt)
-        return max(x, y)
+def initialize(a, b):
+    initial = [[None] * len(a) for _ in range(len(b))]
+    initial[0][0] = 1 if a[0] == b[0] else 0
+    for i in range(1, len(a)):
+        initial[0][i] = 1 if a[i] == b[0] else initial[0][i-1]
+    for i in range(1, len(b)):
+        initial[i][0] = 1 if b[i] == a[0] else initial[i-1][0]
+    return initial
 
 
-print(solution(a, b, 0))
+def solution(a, b):
+    dp = initialize(a, b)
+    for i in range(1, len(b)):
+        for j in range(1, len(a)):
+            if a[j] == b[i]:
+                dp[i][j] = dp[i-1][j-1]+1
+            else:
+                dp[i][j] = max([dp[i-1][j], dp[i][j-1]])
+    return dp[-1][-1]
+
+
+print(solution(a, b))
