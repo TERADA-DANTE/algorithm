@@ -1,23 +1,41 @@
 
 def solution(a):
-    cnt = 0
-    l = len(a)
-    left, right = [0] * l, [0] * l
-    for i in range(l - 2, -1, -1):
-        for j in range(i, l):
-            if a[i] > a[j]:
-                left[i] = left[j] + 1
-                break
-    for i in range(1, l):
-        for j in range(i-1, -1, -1):
-            if a[i] > a[j]:
-                right[i] = right[j] + 1
-                break
-    for i in range(l):
-        if left[i] * right[i] == 0:
-            cnt += 1
-    return cnt
+    def execute(arr, l):
+        for i in range(1, l-1):
+            if arr[i-1] < arr[i] > arr[i+1]:
+                return i
+        else:
+            return 0
+    while True:
+        flag = execute(a, len(a))
+        if flag:
+            a = [a[0]] + a[execute(a, len(a))+1:]
+        else:
+            return len(a)
 
 
 print(solution([-16, 27, 65, -2, 58, -92, -71, -68, -61, -33]))
+# 증감이 존재하는지 확인하고
+# 증감이 존재한다면
+# 앞뒤 증헤드를 찾아 다시 돌린다.
+# 증가구간은 헤드는 트루로 획득가느ㅏㅇ
+# 나머지는 폴스로 획득 가능
 print(solution([9, -1, -5]))
+# 증증 1 2 3 .
+#      t t
+# 증증증증증증감증증증
+# 10 2 3 4 5 6 7 8 2 3 4 5
+# 증감 1 2 0 2개 밖에 못함 증감사이 절대 못구함
+# 감증 1 0 2 .
+# 감감 3 2 1 .
+# 증증증 3 4 5 6 .
+#       t f f f
+# 증증감 3 4 5 2 2, 3, [4 못만듬, 5못만듬 ]
+#        t f f t
+# 증감증 3 5 4 6 3, 4, 6 [5 못만듬]
+# 증감감 3 5 4 2 3, 4, 2
+# 감증증 3 2 5 8 3, 2, 5, 8
+# 감증감 3 2 5 1 3, 1, 2,
+# 감감증 3 2 1 5
+# 감감감 3 2 1 0 .
+# 못만드는 사람 증가구간의 헤드가 아닌녀석 - 다음 증가구간의 헤드사이의 값
