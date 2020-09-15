@@ -1,10 +1,10 @@
 def solution(numbers):
-    result = set()
+    SEX = set()
     while numbers:
         n = numbers.pop()
         for number in numbers:
-            result.add(n + number)
-    return list(result)
+            SEX.add(n + number)
+    return list(sorted(SEX))
 
 
 print(solution([5, 0, 2, 7]))

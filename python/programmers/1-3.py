@@ -1,5 +1,6 @@
 
 def solution(a):
+    cnt = 0
     l = len(a)
     left, right = [0] * l, [0] * l
     for i in range(l - 2, -1, -1):
@@ -12,7 +13,10 @@ def solution(a):
             if a[i] > a[j]:
                 right[i] = right[j] + 1
                 break
-    return [a[i] for i in range(len(a)) if not left[i] or not right[i]]
+    for i in range(l):
+        if left[i] * right[i] == 0:
+            cnt += 1
+    return cnt
 
 
 print(solution([-16, 27, 65, -2, 58, -92, -71, -68, -61, -33]))
