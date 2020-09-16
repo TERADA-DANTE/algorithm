@@ -1,20 +1,28 @@
 
 def solution(a):
-    def execute(arr, l):
-        for i in range(1, l-1):
-            if arr[i-1] < arr[i] > arr[i+1]:
-                return i
-        else:
-            return 0
-    while True:
-        flag = execute(a, len(a))
-        if flag:
-            a = [a[0]] + a[execute(a, len(a))+1:]
-        else:
-            return len(a)
+    cnt = 0
+    l = len(a)
+    m = a[-1]
+    R = [None] * (l-1) + [m]
+    for i in range(l-2, -1, -1):
+        if a[i] < m:
+            m = a[i]
+        R[i] = m
+    m = a[0]
+    L = [m] + [None] * (l-1)
+    for i in range(1, l):
+        if a[i] < m:
+            m = a[i]
+        L[i] = m
+    for i in range(l):
+        if a[i] > L[i] and a[i] > R[i]:
+            cnt += 1
+    return l-cnt
 
 
+    #-92 - 92 - 92 - 92 - 92 - 92 - 71 - 68 - 61 - 33
 print(solution([-16, 27, 65, -2, 58, -92, -71, -68, -61, -33]))
+#-16 - 16 - 16 - 16 - 16 - 92 - 92 - 92 - 92 - 92
 # 증감이 존재하는지 확인하고
 # 증감이 존재한다면
 # 앞뒤 증헤드를 찾아 다시 돌린다.
