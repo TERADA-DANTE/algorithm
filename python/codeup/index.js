@@ -1,7 +1,7 @@
 const fs = require("fs")
-for (let i = 1051; i < 1100; i++) {
-  fs.writeFile(`./${i}.py`, "", function (err) {
-    if (err) return console.log(err)
-    console.log(i, "done")
-  })
-}
+const files = fs.readdirSync("./solved/")
+files.forEach((file) => {
+  const oldPath = `./solved/${file}`
+  const newPath = `./solved/_${file}`
+  fs.rename(oldPath, newPath, (err) => console.log(err))
+})
