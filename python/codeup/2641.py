@@ -1,6 +1,21 @@
 n = int(input())
-dp = [[1, [(0, 0)]], [2, [(0, 0)]], [4, [(1, 0)]]]
-for i in range(n-3):
-    one = dp[-1][1]
-    two = dp[-2][1]
-    three = dp[-3][1]
+cnt = 0
+
+
+def solution(total, chk):
+    global cnt, n
+    chk -= 1
+    if n - total >= 1:
+        solution(total+1, chk)
+    if n - total >= 2:
+        solution(total+2, chk)
+    if n - total >= 3 and chk <= 0:
+        solution(total+3, 3)
+    if n-total == 0:
+        cnt += 1
+    else:
+        return
+
+
+solution(0, 0)
+print(cnt)
