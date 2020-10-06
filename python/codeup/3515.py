@@ -1,6 +1,16 @@
+from itertools import permutations
 n = int(input())
-board = [list(map(int, input().split())) for _ in range(n)]
+costs = [list(map(int, input().split())) for _ in range(n)]
+orders = list(permutations(range(n), n))
+answer = 0
 
-for i in range(n-1, -1, -1):
-    for j in range(n):
-        board[i][j] += max([board[i+1][k] for k in range(n) if k != j])
+for order in orders:
+    result = 0
+    for i in range(n):
+        result += costs[i][order[i]]
+    answer = max(answer, result)
+print(answer)
+# 3 1 4 2
+# 2 5 4 3
+# 1 4 1 2
+# 2 5 4 3
