@@ -17,32 +17,33 @@ def d(month, day): return sum(months[0:month])+day
 
 def solution(n, flowers):
     global answer
-    left, right = d(1, 1), d(3, 1)
+
     flowers.sort(key=lambda v: (v[0], v[1], v[2], v[3]))
     queue = deque(flowers)
     while queue:
         print(answer)
         sM, sD, eM, eD = queue.popleft()
         start, end = d(sM, sD), d(eM, eD)
-        if left == start:
-            if answer and answer[-1][1] < end:
-                answer.pop()
-            left, right = start, end
+        if not answer:
             answer.append([start, end])
-        elif left < start <= end:
-            while len(answer) >= 2:
-                if start <= answer[-2][1] and answer[-1][1] < end:
-                    answer.pop()
-                else:
-                    break
-            if right <= end:
-                left, right = start, end
-                answer.append([start, end])
-        else:
-            return 0
-        if left <= d(3, 1) and d(11, 30) < right:
-            return len(answer)
-    return len(answer)
+            break
+        left, right = answer[-1][0], answer[-1][1]
+        if left == start and right < end:
+            answer.pop()
+            answer.append([start, end])
+        elif left < start <= right:
 
-
+            # 빈경우 그냥 넣는다
+            # 그 외의 경우
+            # 	스타트가 왼쪽에 겹치는경우
+            # 		엔드가 오른쪽보다 작은경우 => 무시
+            # 		엔드가 오른쪽에 겹치는경우 => 무시
+            # 		엔드가 오른쪽보다 큰 경우 => 앞에꺼 팝. 스타트엔드 들억마
+            # 	스타트가 왼쪽과 오른쪽 사이에 있는 경우
+            # 		엔드가 오른쪽보다 작은경우 => 무시
+            # 		엔드가 오른쪽에 겹치는경우 => 무시
+            # 		엔드가 오른쪽보다 큰 경우 =>
+            # 			스타트가 d(3,1)보다 작거나 같으면 다 팝하고 어펜드
+            # 			스타트가 d(3,1)보다 크다면 그냥 어펜드
+            # 	스타트가 오른쪽을 넘어가는 경우 => 0반환
 print(solution(n, flowers))
