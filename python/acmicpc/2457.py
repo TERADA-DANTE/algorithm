@@ -20,30 +20,34 @@ def solution(n, flowers):
 
     flowers.sort(key=lambda v: (v[0], v[1], v[2], v[3]))
     queue = deque(flowers)
+    if d(3, 1) < d(queue[0][0], queue[0][1]):
+        return 0
     while queue:
-        print(answer)
+
         sM, sD, eM, eD = queue.popleft()
         start, end = d(sM, sD), d(eM, eD)
+        if start == end:
+            continue
         if not answer:
             answer.append([start, end])
-            break
-        left, right = answer[-1][0], answer[-1][1]
-        if left == start and right < end:
-            answer.pop()
-            answer.append([start, end])
-        elif left < start <= right:
+            continue
+        tip = answer[-1][1]
+        if tip < start:
+            return 0
+        if end <= tip:
+            continue
+        while answer:
+            r = answer[-2][1] if len(answer) > 1 else d(3, 1)
+            if start <= r:
+                answer.pop()
+            else:
+                break
+        answer.append([start, end])
+        min = answer[0][0]
+        max = answer[-1][-1]
+        if min <= d(3, 1) and d(11, 30) < max:
+            return len(answer)
+    return 0
 
-            # 빈경우 그냥 넣는다
-            # 그 외의 경우
-            # 	스타트가 왼쪽에 겹치는경우
-            # 		엔드가 오른쪽보다 작은경우 => 무시
-            # 		엔드가 오른쪽에 겹치는경우 => 무시
-            # 		엔드가 오른쪽보다 큰 경우 => 앞에꺼 팝. 스타트엔드 들억마
-            # 	스타트가 왼쪽과 오른쪽 사이에 있는 경우
-            # 		엔드가 오른쪽보다 작은경우 => 무시
-            # 		엔드가 오른쪽에 겹치는경우 => 무시
-            # 		엔드가 오른쪽보다 큰 경우 =>
-            # 			스타트가 d(3,1)보다 작거나 같으면 다 팝하고 어펜드
-            # 			스타트가 d(3,1)보다 크다면 그냥 어펜드
-            # 	스타트가 오른쪽을 넘어가는 경우 => 0반환
+
 print(solution(n, flowers))
