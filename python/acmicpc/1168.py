@@ -1,10 +1,10 @@
 import time
 from collections import deque
+from heapq import heappush, heappop
 n, k = list(map(int, input().split()))
 
 
 def solution(n, k):
-    # 1 2 3 4 5 6 7
     dq = deque([i for i in range(1, n+1)])
     answer = []
     for _ in range(n):
