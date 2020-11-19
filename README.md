@@ -7,5 +7,3 @@ https://www.acmicpc.net/ (Korean)
 https://programmers.co.kr/ (Korean)
 
 https://projecteuler.net/ (English)
-
-## 💎 Needs to be solved
