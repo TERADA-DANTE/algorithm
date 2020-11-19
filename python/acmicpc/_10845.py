@@ -19,7 +19,7 @@ for _ in range(n):
     elif commands[0] == 'empty':
         answer.append(1 if not queue else 0)
     elif commands[0] == 'front':
-        answer.append(queue[0])
+        answer.append(queue[0] if queue else -1)
     else:
-        answer.append(queue[-1])
+        answer.append(queue[-1] if queue else -1)
 print('\n'.join(list(map(str, answer))))
