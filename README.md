@@ -1,4 +1,4 @@
-# Github repository for Algorithm Problem solving(PS)🔥
+# Github repository for Algorithm Problem solving(PS)
 
 ## 🎃 Usually I do
 
